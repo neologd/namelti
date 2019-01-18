@@ -15,7 +15,8 @@ module Namelti
         self.unmarshal_class_method = :decode
         self.service_name = 'namelti.server.NameltiService'
 
-        rpc :ConvertNameList, NameltiTranscriptRequest, NameltiTranscriptResponse
+        rpc :ConvertName, NameltiTranscriptRequest, NameltiTranscriptResponse
+        rpc :ConvertNameList, NameltiTranscriptRequests, NameltiTranscriptResponses
       end
 
       Stub = Service.rpc_stub_class

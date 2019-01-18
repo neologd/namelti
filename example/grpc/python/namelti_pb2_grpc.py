@@ -14,16 +14,28 @@ class NameltiServiceStub(object):
     Args:
       channel: A grpc.Channel.
     """
-    self.ConvertNameList = channel.unary_unary(
-        '/namelti.server.NameltiService/ConvertNameList',
+    self.ConvertName = channel.unary_unary(
+        '/namelti.server.NameltiService/ConvertName',
         request_serializer=namelti__pb2.NameltiTranscriptRequest.SerializeToString,
         response_deserializer=namelti__pb2.NameltiTranscriptResponse.FromString,
+        )
+    self.ConvertNameList = channel.unary_unary(
+        '/namelti.server.NameltiService/ConvertNameList',
+        request_serializer=namelti__pb2.NameltiTranscriptRequests.SerializeToString,
+        response_deserializer=namelti__pb2.NameltiTranscriptResponses.FromString,
         )
 
 
 class NameltiServiceServicer(object):
   # missing associated documentation comment in .proto file
   pass
+
+  def ConvertName(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
 
   def ConvertNameList(self, request, context):
     # missing associated documentation comment in .proto file
@@ -35,10 +47,15 @@ class NameltiServiceServicer(object):
 
 def add_NameltiServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
-      'ConvertNameList': grpc.unary_unary_rpc_method_handler(
-          servicer.ConvertNameList,
+      'ConvertName': grpc.unary_unary_rpc_method_handler(
+          servicer.ConvertName,
           request_deserializer=namelti__pb2.NameltiTranscriptRequest.FromString,
           response_serializer=namelti__pb2.NameltiTranscriptResponse.SerializeToString,
+      ),
+      'ConvertNameList': grpc.unary_unary_rpc_method_handler(
+          servicer.ConvertNameList,
+          request_deserializer=namelti__pb2.NameltiTranscriptRequests.FromString,
+          response_serializer=namelti__pb2.NameltiTranscriptResponses.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

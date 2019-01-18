@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='namelti.server',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\rnamelti.proto\x12\x0enamelti.server\"+\n\x18NameltiTranscriptRequest\x12\x0f\n\x07queries\x18\x01 \x03(\t\"\x18\n\x08MapVaule\x12\x0c\n\x04\x64ict\x18\x01 \x03(\t\"\xae\x01\n\x19NameltiTranscriptResponse\x12G\n\x07results\x18\x01 \x03(\x0b\x32\x36.namelti.server.NameltiTranscriptResponse.ResultsEntry\x1aH\n\x0cResultsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.namelti.server.MapVaule:\x02\x38\x01\x32z\n\x0eNameltiService\x12h\n\x0f\x43onvertNameList\x12(.namelti.server.NameltiTranscriptRequest\x1a).namelti.server.NameltiTranscriptResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\rnamelti.proto\x12\x0enamelti.server\")\n\x18NameltiTranscriptRequest\x12\r\n\x05query\x18\x01 \x01(\t\",\n\x19NameltiTranscriptRequests\x12\x0f\n\x07queries\x18\x01 \x03(\t\"g\n\nResultList\x12\x32\n\x07results\x18\x01 \x03(\x0b\x32!.namelti.server.ResultList.Result\x1a%\n\x06Result\x12\x0c\n\x04yomi\x18\x01 \x01(\t\x12\r\n\x05score\x18\x02 \x01(\x02\"Y\n\x19NameltiTranscriptResponse\x12\x0f\n\x07surface\x18\x01 \x01(\t\x12+\n\x07results\x18\x02 \x01(\x0b\x32\x1a.namelti.server.ResultList\"\xb8\x01\n\x1aNameltiTranscriptResponses\x12L\n\tresponses\x18\x01 \x03(\x0b\x32\x39.namelti.server.NameltiTranscriptResponses.ResponsesEntry\x1aL\n\x0eResponsesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.namelti.server.ResultList:\x02\x38\x01\x32\xe2\x01\n\x0eNameltiService\x12\x64\n\x0b\x43onvertName\x12(.namelti.server.NameltiTranscriptRequest\x1a).namelti.server.NameltiTranscriptResponse\"\x00\x12j\n\x0f\x43onvertNameList\x12).namelti.server.NameltiTranscriptRequests\x1a*.namelti.server.NameltiTranscriptResponses\"\x00\x62\x06proto3')
 )
 
 
@@ -33,9 +33,9 @@ _NAMELTITRANSCRIPTREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='queries', full_name='namelti.server.NameltiTranscriptRequest.queries', index=0,
-      number=1, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
+      name='query', full_name='namelti.server.NameltiTranscriptRequest.query', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -52,19 +52,19 @@ _NAMELTITRANSCRIPTREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=33,
-  serialized_end=76,
+  serialized_end=74,
 )
 
 
-_MAPVAULE = _descriptor.Descriptor(
-  name='MapVaule',
-  full_name='namelti.server.MapVaule',
+_NAMELTITRANSCRIPTREQUESTS = _descriptor.Descriptor(
+  name='NameltiTranscriptRequests',
+  full_name='namelti.server.NameltiTranscriptRequests',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='dict', full_name='namelti.server.MapVaule.dict', index=0,
+      name='queries', full_name='namelti.server.NameltiTranscriptRequests.queries', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -82,27 +82,133 @@ _MAPVAULE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=78,
-  serialized_end=102,
+  serialized_start=76,
+  serialized_end=120,
 )
 
 
-_NAMELTITRANSCRIPTRESPONSE_RESULTSENTRY = _descriptor.Descriptor(
-  name='ResultsEntry',
-  full_name='namelti.server.NameltiTranscriptResponse.ResultsEntry',
+_RESULTLIST_RESULT = _descriptor.Descriptor(
+  name='Result',
+  full_name='namelti.server.ResultList.Result',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='namelti.server.NameltiTranscriptResponse.ResultsEntry.key', index=0,
+      name='yomi', full_name='namelti.server.ResultList.Result.yomi', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='value', full_name='namelti.server.NameltiTranscriptResponse.ResultsEntry.value', index=1,
+      name='score', full_name='namelti.server.ResultList.Result.score', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=188,
+  serialized_end=225,
+)
+
+_RESULTLIST = _descriptor.Descriptor(
+  name='ResultList',
+  full_name='namelti.server.ResultList',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='results', full_name='namelti.server.ResultList.results', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_RESULTLIST_RESULT, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=122,
+  serialized_end=225,
+)
+
+
+_NAMELTITRANSCRIPTRESPONSE = _descriptor.Descriptor(
+  name='NameltiTranscriptResponse',
+  full_name='namelti.server.NameltiTranscriptResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='surface', full_name='namelti.server.NameltiTranscriptResponse.surface', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='results', full_name='namelti.server.NameltiTranscriptResponse.results', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=227,
+  serialized_end=316,
+)
+
+
+_NAMELTITRANSCRIPTRESPONSES_RESPONSESENTRY = _descriptor.Descriptor(
+  name='ResponsesEntry',
+  full_name='namelti.server.NameltiTranscriptResponses.ResponsesEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='namelti.server.NameltiTranscriptResponses.ResponsesEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='namelti.server.NameltiTranscriptResponses.ResponsesEntry.value', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -120,19 +226,19 @@ _NAMELTITRANSCRIPTRESPONSE_RESULTSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=207,
-  serialized_end=279,
+  serialized_start=427,
+  serialized_end=503,
 )
 
-_NAMELTITRANSCRIPTRESPONSE = _descriptor.Descriptor(
-  name='NameltiTranscriptResponse',
-  full_name='namelti.server.NameltiTranscriptResponse',
+_NAMELTITRANSCRIPTRESPONSES = _descriptor.Descriptor(
+  name='NameltiTranscriptResponses',
+  full_name='namelti.server.NameltiTranscriptResponses',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='results', full_name='namelti.server.NameltiTranscriptResponse.results', index=0,
+      name='responses', full_name='namelti.server.NameltiTranscriptResponses.responses', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -141,7 +247,7 @@ _NAMELTITRANSCRIPTRESPONSE = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_NAMELTITRANSCRIPTRESPONSE_RESULTSENTRY, ],
+  nested_types=[_NAMELTITRANSCRIPTRESPONSES_RESPONSESENTRY, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -150,16 +256,21 @@ _NAMELTITRANSCRIPTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=105,
-  serialized_end=279,
+  serialized_start=319,
+  serialized_end=503,
 )
 
-_NAMELTITRANSCRIPTRESPONSE_RESULTSENTRY.fields_by_name['value'].message_type = _MAPVAULE
-_NAMELTITRANSCRIPTRESPONSE_RESULTSENTRY.containing_type = _NAMELTITRANSCRIPTRESPONSE
-_NAMELTITRANSCRIPTRESPONSE.fields_by_name['results'].message_type = _NAMELTITRANSCRIPTRESPONSE_RESULTSENTRY
+_RESULTLIST_RESULT.containing_type = _RESULTLIST
+_RESULTLIST.fields_by_name['results'].message_type = _RESULTLIST_RESULT
+_NAMELTITRANSCRIPTRESPONSE.fields_by_name['results'].message_type = _RESULTLIST
+_NAMELTITRANSCRIPTRESPONSES_RESPONSESENTRY.fields_by_name['value'].message_type = _RESULTLIST
+_NAMELTITRANSCRIPTRESPONSES_RESPONSESENTRY.containing_type = _NAMELTITRANSCRIPTRESPONSES
+_NAMELTITRANSCRIPTRESPONSES.fields_by_name['responses'].message_type = _NAMELTITRANSCRIPTRESPONSES_RESPONSESENTRY
 DESCRIPTOR.message_types_by_name['NameltiTranscriptRequest'] = _NAMELTITRANSCRIPTREQUEST
-DESCRIPTOR.message_types_by_name['MapVaule'] = _MAPVAULE
+DESCRIPTOR.message_types_by_name['NameltiTranscriptRequests'] = _NAMELTITRANSCRIPTREQUESTS
+DESCRIPTOR.message_types_by_name['ResultList'] = _RESULTLIST
 DESCRIPTOR.message_types_by_name['NameltiTranscriptResponse'] = _NAMELTITRANSCRIPTRESPONSE
+DESCRIPTOR.message_types_by_name['NameltiTranscriptResponses'] = _NAMELTITRANSCRIPTRESPONSES
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 NameltiTranscriptRequest = _reflection.GeneratedProtocolMessageType('NameltiTranscriptRequest', (_message.Message,), dict(
@@ -169,30 +280,52 @@ NameltiTranscriptRequest = _reflection.GeneratedProtocolMessageType('NameltiTran
   ))
 _sym_db.RegisterMessage(NameltiTranscriptRequest)
 
-MapVaule = _reflection.GeneratedProtocolMessageType('MapVaule', (_message.Message,), dict(
-  DESCRIPTOR = _MAPVAULE,
+NameltiTranscriptRequests = _reflection.GeneratedProtocolMessageType('NameltiTranscriptRequests', (_message.Message,), dict(
+  DESCRIPTOR = _NAMELTITRANSCRIPTREQUESTS,
   __module__ = 'namelti_pb2'
-  # @@protoc_insertion_point(class_scope:namelti.server.MapVaule)
+  # @@protoc_insertion_point(class_scope:namelti.server.NameltiTranscriptRequests)
   ))
-_sym_db.RegisterMessage(MapVaule)
+_sym_db.RegisterMessage(NameltiTranscriptRequests)
 
-NameltiTranscriptResponse = _reflection.GeneratedProtocolMessageType('NameltiTranscriptResponse', (_message.Message,), dict(
+ResultList = _reflection.GeneratedProtocolMessageType('ResultList', (_message.Message,), dict(
 
-  ResultsEntry = _reflection.GeneratedProtocolMessageType('ResultsEntry', (_message.Message,), dict(
-    DESCRIPTOR = _NAMELTITRANSCRIPTRESPONSE_RESULTSENTRY,
+  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
+    DESCRIPTOR = _RESULTLIST_RESULT,
     __module__ = 'namelti_pb2'
-    # @@protoc_insertion_point(class_scope:namelti.server.NameltiTranscriptResponse.ResultsEntry)
+    # @@protoc_insertion_point(class_scope:namelti.server.ResultList.Result)
     ))
   ,
+  DESCRIPTOR = _RESULTLIST,
+  __module__ = 'namelti_pb2'
+  # @@protoc_insertion_point(class_scope:namelti.server.ResultList)
+  ))
+_sym_db.RegisterMessage(ResultList)
+_sym_db.RegisterMessage(ResultList.Result)
+
+NameltiTranscriptResponse = _reflection.GeneratedProtocolMessageType('NameltiTranscriptResponse', (_message.Message,), dict(
   DESCRIPTOR = _NAMELTITRANSCRIPTRESPONSE,
   __module__ = 'namelti_pb2'
   # @@protoc_insertion_point(class_scope:namelti.server.NameltiTranscriptResponse)
   ))
 _sym_db.RegisterMessage(NameltiTranscriptResponse)
-_sym_db.RegisterMessage(NameltiTranscriptResponse.ResultsEntry)
+
+NameltiTranscriptResponses = _reflection.GeneratedProtocolMessageType('NameltiTranscriptResponses', (_message.Message,), dict(
+
+  ResponsesEntry = _reflection.GeneratedProtocolMessageType('ResponsesEntry', (_message.Message,), dict(
+    DESCRIPTOR = _NAMELTITRANSCRIPTRESPONSES_RESPONSESENTRY,
+    __module__ = 'namelti_pb2'
+    # @@protoc_insertion_point(class_scope:namelti.server.NameltiTranscriptResponses.ResponsesEntry)
+    ))
+  ,
+  DESCRIPTOR = _NAMELTITRANSCRIPTRESPONSES,
+  __module__ = 'namelti_pb2'
+  # @@protoc_insertion_point(class_scope:namelti.server.NameltiTranscriptResponses)
+  ))
+_sym_db.RegisterMessage(NameltiTranscriptResponses)
+_sym_db.RegisterMessage(NameltiTranscriptResponses.ResponsesEntry)
 
 
-_NAMELTITRANSCRIPTRESPONSE_RESULTSENTRY._options = None
+_NAMELTITRANSCRIPTRESPONSES_RESPONSESENTRY._options = None
 
 _NAMELTISERVICE = _descriptor.ServiceDescriptor(
   name='NameltiService',
@@ -200,16 +333,25 @@ _NAMELTISERVICE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=281,
-  serialized_end=403,
+  serialized_start=506,
+  serialized_end=732,
   methods=[
   _descriptor.MethodDescriptor(
-    name='ConvertNameList',
-    full_name='namelti.server.NameltiService.ConvertNameList',
+    name='ConvertName',
+    full_name='namelti.server.NameltiService.ConvertName',
     index=0,
     containing_service=None,
     input_type=_NAMELTITRANSCRIPTREQUEST,
     output_type=_NAMELTITRANSCRIPTRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ConvertNameList',
+    full_name='namelti.server.NameltiService.ConvertNameList',
+    index=1,
+    containing_service=None,
+    input_type=_NAMELTITRANSCRIPTREQUESTS,
+    output_type=_NAMELTITRANSCRIPTRESPONSES,
     serialized_options=None,
   ),
 ])
