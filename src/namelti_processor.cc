@@ -30,11 +30,28 @@ NameltiProcessor::NameltiProcessor(): transcripter(NameltiTranscripter()) {
 NameltiProcessor::~NameltiProcessor() {
 }
 
-std::map<std::string, std::vector<std::string>> NameltiProcessor::ConvertNameList(std::vector<std::string> queries) {
-  std::map<std::string, std::vector<std::string>> processor_result;
+std::vector<std::pair<std::string, float>>  NameltiProcessor::ConvertName(std::string query) {
+  std::vector<std::pair<std::string, float>> processor_result;
+  try{
+    std::vector<std::string> queries;
+    queries.push_back(query);
+    std::map<std::string, std::vector<std::pair<std::string, float>>> transctipter_result = transcripter.GetTranscript(queries);
+    if (!transctipter_result.empty()) {
+      processor_result = transctipter_result[query];
+    }
+  }
+  catch(const std::exception& e){
+    std::cerr << "error: " << e.what() << std::endl;
+    exit(1);
+  }
+  return processor_result;
+}
+
+std::map<std::string, std::vector<std::pair<std::string, float>>> NameltiProcessor::ConvertNameList(std::vector<std::string> queries) {
+  std::map<std::string, std::vector<std::pair<std::string, float>>> processor_result;
 
   try{
-    std::map<std::string, std::vector<std::string>> transctipter_result = transcripter.GetTranscript(queries);
+    std::map<std::string, std::vector<std::pair<std::string, float>>> transctipter_result = transcripter.GetTranscript(queries);
     if (!transctipter_result.empty()) {
       processor_result = transctipter_result;
     }

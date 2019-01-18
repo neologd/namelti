@@ -40,7 +40,7 @@ NameltiTranscripter::Tagger* NameltiTranscripter::GetTagger() {
   return t;
 }
 
-bool has_key_using_find(std::map<std::string, std::vector<std::string>> &m, std::string s){
+bool has_key_using_find(std::map<std::string, std::vector<std::pair<std::string, float> > > &m, std::string s){
   if (m.find(s) == m.end()){
     return false;
   } else {
@@ -48,8 +48,8 @@ bool has_key_using_find(std::map<std::string, std::vector<std::string>> &m, std:
   }
 }
 
-std::map<std::string, std::vector<std::string>> NameltiTranscripter::GetTranscript(std::vector<std::string> &queries) {
-  std::map<std::string, std::vector<std::string>> transcripter_result;
+std::map<std::string, std::vector<std::pair<std::string, float> > > NameltiTranscripter::GetTranscript(std::vector<std::string> &queries) {
+  std::map<std::string, std::vector<std::pair<std::string, float> > > transcripter_result;
   size_t nbest_num = 5;
   try {
     for (std::string& query : queries) {
@@ -62,7 +62,8 @@ std::map<std::string, std::vector<std::string>> NameltiTranscripter::GetTranscri
 
       //bool is_general_name = false;
       //bool is_first_family_name = false;
-      std::vector<std::string> yomigana_vec;
+      std::map<std::string, int> yomigana_cache;
+      std::vector<std::pair<std::string, float> > result_vec;
 
       std::string yomigana_buf = "";
       //bool is_first_name = false;
@@ -104,9 +105,12 @@ std::map<std::string, std::vector<std::string>> NameltiTranscripter::GetTranscri
             }
             if (!has_tab) {
               if (yomigana_buf != "") {
-                std::vector<std::string>::iterator finder = find(yomigana_vec.begin(), yomigana_vec.end(), yomigana_buf);
-                if (finder == yomigana_vec.end()) {
-                  yomigana_vec.push_back(yomigana_buf);
+                decltype(yomigana_cache)::iterator finder = yomigana_cache.find(yomigana_buf);
+                if (finder == yomigana_cache.end()) {
+                  float score = 1.0;
+                  std::pair<std::string, float> res = std::make_pair(yomigana_buf, score);
+                  result_vec.push_back(res);
+                  yomigana_cache.insert(std::make_pair(yomigana_buf, 1));
                 }
                 yomigana_buf = "";
               }
@@ -115,8 +119,8 @@ std::map<std::string, std::vector<std::string>> NameltiTranscripter::GetTranscri
           }
         }
       }
-      if (!yomigana_vec.empty()) {
-        transcripter_result[query] = yomigana_vec;
+      if (!result_vec.empty()) {
+        transcripter_result[query] = result_vec;
       }
     }
   }

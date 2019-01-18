@@ -34,7 +34,7 @@ public:
   };
 
   Tagger* GetTagger();
-  std::map<std::string, std::vector<std::string>> GetTranscript(std::vector<std::string>&);
+  std::map<std::string, std::vector<std::pair<std::string, float>>> GetTranscript(std::vector<std::string>&);
 
 private:
   NameltiTranscripter::Tagger *tagger;
