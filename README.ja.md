@@ -33,7 +33,7 @@ Namelti は開発における初期段階です。
     サトウトシノリ, サトウサトシキノ, サトウサトシオサム, サトウトシキノ
 
 ## Copyrights
-Copyright (c) 2018 Toshinori Sato (@overlast) All rights reserved.
+Copyright (c) 2018-2019 Toshinori Sato (@overlast) All rights reserved.
 
 We select the 'Apache License, Version 2.0'. Please check following link.
 

@@ -13,7 +13,7 @@ README.ja.md is written in Japanese.
 - https://github.com/neologd/namelti/blob/master/README.ja.md
 
 ## Copyrights
-Copyright (c) 2018 Toshinori Sato (@overlast) All rights reserved.
+Copyright (c) 2018-2019 Toshinori Sato (@overlast) All rights reserved.
 
 We select the 'Apache License, Version 2.0'. Please check following link.
 
