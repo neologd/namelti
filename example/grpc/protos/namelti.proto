@@ -3,17 +3,31 @@ syntax = "proto3";
 package namelti.server;
 
 message NameltiTranscriptRequest {
+  string query = 1;
+}
+
+message NameltiTranscriptRequests {
   repeated string queries = 1;
 }
 
-message MapVaule {
-  repeated string dict = 1;
+message ResultList {
+  message Result {
+    string yomi = 1;
+    float score = 2;
+  }
+  repeated Result results = 1;
 }
 
 message NameltiTranscriptResponse {
-  map<string, MapVaule> results = 1;
+  string surface = 1;
+  ResultList results = 2;
+}
+
+message NameltiTranscriptResponses {
+  map<string, ResultList> responses = 1;
 }
 
 service NameltiService {
-  rpc ConvertNameList (NameltiTranscriptRequest) returns (NameltiTranscriptResponse) {}
+  rpc ConvertName (NameltiTranscriptRequest) returns (NameltiTranscriptResponse) {}
+  rpc ConvertNameList (NameltiTranscriptRequests) returns (NameltiTranscriptResponses) {}
 }
