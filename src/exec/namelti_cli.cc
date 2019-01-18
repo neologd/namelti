@@ -24,33 +24,23 @@
 int main(int argc, char* argv[]) {
     try {
         namelti::NameltiProcessor namelti;
-        std::vector<std::string> queries;
-        std::map<std::string, std::vector<std::string>> dict;
         while (true) {
-            std::string raw_input;
-            std::getline(std::cin, raw_input);
-            if(std::cin.eof() || raw_input == "exit" || raw_input == "quit" || raw_input == "bye"){
+            std::string query;
+            std::getline(std::cin, query);
+            if(std::cin.eof() || query == "exit" || query == "quit" || query == "bye"){
                 break;
             }
-            else if(raw_input.empty()){
+            else if(query.empty()){
                 continue;
             }
-
-            queries.push_back(raw_input);
-
-            dict = namelti.ConvertNameList(queries);
-            if(!dict.empty()){
-              for (auto it = dict.begin(); it != dict.end(); ++it) {
-                //std::cout << it->first << " => " << "\n";
-                std::vector<std::string> results = it->second;
-                for (std::string& result: results) {
-                  std::cout << result << ", ";
-                }
-                std::cout << "\n";
+            std::vector<std::pair<std::string, float>> results = namelti.ConvertName(query);
+            if(!results.empty()){
+              //std::cout << it->first << " => " << "\n";
+              for (std::pair<std::string, float>& result : results) {
+                std::cout << result.first << "(" << result.second << "), ";
               }
+              std::cout << "\n";
             }
-            queries.clear();
-            dict.clear();
         }
     }
     catch (const std::exception& e) {
