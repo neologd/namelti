@@ -43,44 +43,31 @@ public:
 
   Status ConvertNameList(ServerContext*, const server::NameltiTranscriptRequests* request, server::NameltiTranscriptResponses* response) override
   {
-
     namelti::NameltiProcessor namelti;
     std::vector<std::string> queries;
     std::map<std::string, std::vector<std::pair<std::string, float>>> dict;
-
+    auto res = response->mutable_responses();
     for(const auto& q: request->queries()){
       queries.push_back(q);
     }
     dict = namelti.ConvertNameList(queries);
     if(!dict.empty()){
       for (auto dit = dict.begin(); dit != dict.end(); ++dit) {
-        std::string surfase = dit->first;
+        std::string surface = dit->first;
         std::vector<std::pair<std::string, float>> results = dit->second;
+        server::ResultList res_list;
+        size_t j = 0;
         for (std::pair<std::string, float>& result: results) {
           std::string yomigana = result.first;
           float score = result.second;
+          res_list.add_results();
+          auto* entry = res_list.mutable_results(j++);
+          entry->set_yomi(yomigana);
+          entry->set_score(score);
         }
+        (*res)[surface] = res_list;
       }
     }
-
-    /*
-    std::vector<std::string> queries = request->get_queries();
-      for (auto it = dict.begin(); it != dict.end(); ++it) {
-        std::vector<std::string> results = it->second;
-
-        server::MapVaule* val_vec;
-        for (std::string& result: results) {
-          val_vec->add_dict(result);
-          std::cout << result << ", ";
-        }
-        std::cout << "\n";
-
-        std::string key = it->first;
-        response->results()[key] = val_vec;
-        return Status::OK;
-    }
-          */
-
     return Status::CANCELLED;
   }
 };
