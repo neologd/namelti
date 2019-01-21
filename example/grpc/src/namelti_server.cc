@@ -68,7 +68,33 @@ public:
         (*res)[surface] = res_list;
       }
     }
-    return Status::CANCELLED;
+    return Status::OK;
+  }
+
+  Status ConvertName(ServerContext*, const server::NameltiTranscriptRequest* request, server::NameltiTranscriptResponse* response) override
+  {
+    namelti::NameltiProcessor namelti;
+    std::string query = request->query();
+    auto res_surface = response->mutable_surface();
+    auto res_results = response->mutable_results();
+
+    std::vector<std::pair<std::string, float>> results = namelti.ConvertName(query);
+
+    server::ResultList res_list;
+    size_t j = 0;
+    for (std::pair<std::string, float>& result: results) {
+      std::string yomigana = result.first;
+      float score = result.second;
+      res_list.add_results();
+      auto* entry = res_list.mutable_results(j++);
+      entry->set_yomi(yomigana);
+      entry->set_score(score);
+    }
+
+    (*res_surface) = query;
+    (*res_results) = res_list;
+
+    return Status::OK;
   }
 };
 
