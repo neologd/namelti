@@ -5,17 +5,14 @@
 #include "namelti.pb.h"
 #include "namelti.grpc.pb.h"
 
-#include <functional>
-#include <grpcpp/impl/codegen/async_stream.h>
-#include <grpcpp/impl/codegen/async_unary_call.h>
-#include <grpcpp/impl/codegen/channel_interface.h>
-#include <grpcpp/impl/codegen/client_unary_call.h>
-#include <grpcpp/impl/codegen/client_callback.h>
-#include <grpcpp/impl/codegen/method_handler_impl.h>
-#include <grpcpp/impl/codegen/rpc_service_method.h>
-#include <grpcpp/impl/codegen/server_callback.h>
-#include <grpcpp/impl/codegen/service_type.h>
-#include <grpcpp/impl/codegen/sync_stream.h>
+#include <grpc++/impl/codegen/async_stream.h>
+#include <grpc++/impl/codegen/async_unary_call.h>
+#include <grpc++/impl/codegen/channel_interface.h>
+#include <grpc++/impl/codegen/client_unary_call.h>
+#include <grpc++/impl/codegen/method_handler_impl.h>
+#include <grpc++/impl/codegen/rpc_service_method.h>
+#include <grpc++/impl/codegen/service_type.h>
+#include <grpc++/impl/codegen/sync_stream.h>
 namespace namelti {
 namespace server {
 
@@ -25,58 +22,41 @@ static const char* NameltiService_method_names[] = {
 };
 
 std::unique_ptr< NameltiService::Stub> NameltiService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
-  (void)options;
   std::unique_ptr< NameltiService::Stub> stub(new NameltiService::Stub(channel));
   return stub;
 }
 
 NameltiService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
-  : channel_(channel), rpcmethod_ConvertName_(NameltiService_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_ConvertNameList_(NameltiService_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  : channel_(channel), rpcmethod_ConvertName_(NameltiService_method_names[0], ::grpc::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ConvertNameList_(NameltiService_method_names[1], ::grpc::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status NameltiService::Stub::ConvertName(::grpc::ClientContext* context, const ::namelti::server::NameltiTranscriptRequest& request, ::namelti::server::NameltiTranscriptResponse* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_ConvertName_, context, request, response);
-}
-
-void NameltiService::Stub::experimental_async::ConvertName(::grpc::ClientContext* context, const ::namelti::server::NameltiTranscriptRequest* request, ::namelti::server::NameltiTranscriptResponse* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_ConvertName_, context, request, response, std::move(f));
+  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_ConvertName_, context, request, response);
 }
 
 ::grpc::ClientAsyncResponseReader< ::namelti::server::NameltiTranscriptResponse>* NameltiService::Stub::AsyncConvertNameRaw(::grpc::ClientContext* context, const ::namelti::server::NameltiTranscriptRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::namelti::server::NameltiTranscriptResponse>::Create(channel_.get(), cq, rpcmethod_ConvertName_, context, request, true);
-}
-
-::grpc::ClientAsyncResponseReader< ::namelti::server::NameltiTranscriptResponse>* NameltiService::Stub::PrepareAsyncConvertNameRaw(::grpc::ClientContext* context, const ::namelti::server::NameltiTranscriptRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::namelti::server::NameltiTranscriptResponse>::Create(channel_.get(), cq, rpcmethod_ConvertName_, context, request, false);
+  return new ::grpc::ClientAsyncResponseReader< ::namelti::server::NameltiTranscriptResponse>(channel_.get(), cq, rpcmethod_ConvertName_, context, request);
 }
 
 ::grpc::Status NameltiService::Stub::ConvertNameList(::grpc::ClientContext* context, const ::namelti::server::NameltiTranscriptRequests& request, ::namelti::server::NameltiTranscriptResponses* response) {
-  return ::grpc::internal::BlockingUnaryCall(channel_.get(), rpcmethod_ConvertNameList_, context, request, response);
-}
-
-void NameltiService::Stub::experimental_async::ConvertNameList(::grpc::ClientContext* context, const ::namelti::server::NameltiTranscriptRequests* request, ::namelti::server::NameltiTranscriptResponses* response, std::function<void(::grpc::Status)> f) {
-  return ::grpc::internal::CallbackUnaryCall(stub_->channel_.get(), stub_->rpcmethod_ConvertNameList_, context, request, response, std::move(f));
+  return ::grpc::BlockingUnaryCall(channel_.get(), rpcmethod_ConvertNameList_, context, request, response);
 }
 
 ::grpc::ClientAsyncResponseReader< ::namelti::server::NameltiTranscriptResponses>* NameltiService::Stub::AsyncConvertNameListRaw(::grpc::ClientContext* context, const ::namelti::server::NameltiTranscriptRequests& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::namelti::server::NameltiTranscriptResponses>::Create(channel_.get(), cq, rpcmethod_ConvertNameList_, context, request, true);
-}
-
-::grpc::ClientAsyncResponseReader< ::namelti::server::NameltiTranscriptResponses>* NameltiService::Stub::PrepareAsyncConvertNameListRaw(::grpc::ClientContext* context, const ::namelti::server::NameltiTranscriptRequests& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderFactory< ::namelti::server::NameltiTranscriptResponses>::Create(channel_.get(), cq, rpcmethod_ConvertNameList_, context, request, false);
+  return new ::grpc::ClientAsyncResponseReader< ::namelti::server::NameltiTranscriptResponses>(channel_.get(), cq, rpcmethod_ConvertNameList_, context, request);
 }
 
 NameltiService::Service::Service() {
-  AddMethod(new ::grpc::internal::RpcServiceMethod(
+  AddMethod(new ::grpc::RpcServiceMethod(
       NameltiService_method_names[0],
-      ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< NameltiService::Service, ::namelti::server::NameltiTranscriptRequest, ::namelti::server::NameltiTranscriptResponse>(
+      ::grpc::RpcMethod::NORMAL_RPC,
+      new ::grpc::RpcMethodHandler< NameltiService::Service, ::namelti::server::NameltiTranscriptRequest, ::namelti::server::NameltiTranscriptResponse>(
           std::mem_fn(&NameltiService::Service::ConvertName), this)));
-  AddMethod(new ::grpc::internal::RpcServiceMethod(
+  AddMethod(new ::grpc::RpcServiceMethod(
       NameltiService_method_names[1],
-      ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< NameltiService::Service, ::namelti::server::NameltiTranscriptRequests, ::namelti::server::NameltiTranscriptResponses>(
+      ::grpc::RpcMethod::NORMAL_RPC,
+      new ::grpc::RpcMethodHandler< NameltiService::Service, ::namelti::server::NameltiTranscriptRequests, ::namelti::server::NameltiTranscriptResponses>(
           std::mem_fn(&NameltiService::Service::ConvertNameList), this)));
 }
 
