@@ -119,7 +119,7 @@ void RunServer(const std::string& server_address, std::shared_ptr<NameltiProcess
 int main(int argc, char** argv) {
     try{
         auto namelti = std::make_shared<NameltiProcessor>();
-        std::string grpc_server_address = "localhost:50194";
+        std::string grpc_server_address = "0.0.0.0:50194";
         RunServer(grpc_server_address, namelti);
     }
     catch(const std::exception& e){
