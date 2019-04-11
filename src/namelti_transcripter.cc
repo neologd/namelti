@@ -77,6 +77,7 @@ std::map<std::string, std::vector<std::pair<std::string, float> > > NameltiTrans
               if(*line_end == '\t'){
                 has_tab = true;
                 if(line_start < line_end){
+                  std::string surface = std::string(line_start, line_end);
                   //std::cout << std::string(line_start, line_end) << "\n"; // surface
                   line_start = line_end + 1;
                   //std::cout << std::string(line_start, end) << "\n"; // features
@@ -98,7 +99,7 @@ std::map<std::string, std::vector<std::pair<std::string, float> > > NameltiTrans
                   if (features.size() == 9) {
                     yomigana_buf += features[7];
                   } else {
-                    yomigana_buf += features[0];
+                    yomigana_buf += surface;
                   }
                 }
               }
