@@ -73,7 +73,7 @@ void RESTServer::convertNameListHandler(const Pistache::Rest::Request& request, 
 
   std::map<std::string, std::vector<std::pair<std::string, float>>> dict;
   dict = namelti.ConvertNameList(queries);
-  nlohmann::json response_json;
+  nlohmann::json response_json(nlohmann::json::value_t::object);
   if(!dict.empty()){
     for (auto dit = dict.begin(); dit != dict.end(); ++dit) {
       std::string surface = dit->first;
@@ -103,7 +103,7 @@ void RESTServer::convertNameHandler(const Pistache::Rest::Request& request, Pist
   std::cout << query << std::endl;
   std::vector<std::pair<std::string, float>> results = namelti.ConvertName(query);
 
-  nlohmann::json response_json;
+  nlohmann::json response_json(nlohmann::json::value_t::array);
   for (std::pair<std::string, float>& result: results) {
     std::string yomigana = result.first;
     float score = result.second;
