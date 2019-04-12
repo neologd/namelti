@@ -99,6 +99,10 @@ std::map<std::string, std::vector<std::pair<std::string, float> > > NameltiTrans
                   if (features.size() == 9) {
                     yomigana_buf += features[7];
                   } else {
+                    if (surface.compare(query) == 0) {
+                      yomigana_buf = "";
+                      break;
+                    }
                     yomigana_buf += surface;
                   }
                 }
