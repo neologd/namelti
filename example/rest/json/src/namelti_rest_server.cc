@@ -53,6 +53,7 @@ void RESTServer::shutdown() {
 void RESTServer::setupRoutes() {
   Pistache::Rest::Routes::Post(router, "/api/v1/sentence:convertNameList", Pistache::Rest::Routes::bind(&RESTServer::convertNameListHandler, this));
   Pistache::Rest::Routes::Post(router, "/api/v1/sentence:convertName", Pistache::Rest::Routes::bind(&RESTServer::convertNameHandler, this));
+  Pistache::Rest::Routes::Get(router, "/monitor/l7check", Pistache::Rest::Routes::bind(&RESTServer::l7HealthCheckHandler, this));
   Pistache::Rest::Routes::Get(router, "/", Pistache::Rest::Routes::bind(&RESTServer::helloHandler, this));
 }
 
@@ -63,6 +64,14 @@ void RESTServer::helloHandler(const Pistache::Rest::Request& request, Pistache::
   response_json["response"] = "Hello. I'm Namelti.";
   response.send(Http::Code::Ok, response_json.dump());
   response.headers().add<Http::Header::ContentType>(MIME(Application, Json));
+}
+
+void RESTServer::l7HealthCheckHandler(const Pistache::Rest::Request& request, Pistache::Http::ResponseWriter response) {
+  std::string res = request.resource();
+  nlohmann::json response_json;
+  response_json["response"] = "OK";
+  response.send(Http::Code::Ok, response_json.dump());
+  response.headers().add<Http::Header::ContentType>(MIME(Text, Plain));
 }
 
 void RESTServer::convertNameListHandler(const Pistache::Rest::Request& request, Pistache::Http::ResponseWriter response) {

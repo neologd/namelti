@@ -26,6 +26,7 @@ namespace namelti {
  private:
 
     void helloHandler(const Pistache::Rest::Request& request, Pistache::Http::ResponseWriter response);
+    void l7HealthCheckHandler(const Pistache::Rest::Request& request, Pistache::Http::ResponseWriter response);
     void convertNameListHandler(const Pistache::Rest::Request& request, Pistache::Http::ResponseWriter response);
     void convertNameHandler(const Pistache::Rest::Request& request, Pistache::Http::ResponseWriter response);
     void setupRoutes();
