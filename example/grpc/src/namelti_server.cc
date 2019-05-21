@@ -50,7 +50,8 @@ public:
     for(const auto& q: request->queries()){
       queries.push_back(q);
     }
-    dict = namelti.ConvertNameList(queries);
+    size_t nbest_num = 10;
+    dict = namelti.ConvertNameList(queries, nbest_num);
     if(!dict.empty()){
       for (auto dit = dict.begin(); dit != dict.end(); ++dit) {
         std::string surface = dit->first;
@@ -77,8 +78,8 @@ public:
     std::string query = request->query();
     auto res_surface = response->mutable_surface();
     auto res_results = response->mutable_results();
-
-    std::vector<std::pair<std::string, float>> results = namelti.ConvertName(query);
+    size_t nbest_num = 10;
+    std::vector<std::pair<std::string, float>> results = namelti.ConvertName(query, nbest_num);
 
     server::ResultList res_list;
     size_t j = 0;

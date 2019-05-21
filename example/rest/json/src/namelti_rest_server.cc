@@ -81,7 +81,8 @@ void RESTServer::convertNameListHandler(const Pistache::Rest::Request& request, 
   std::vector<std::string> queries = request_json["query"];
 
   std::map<std::string, std::vector<std::pair<std::string, float>>> dict;
-  dict = namelti.ConvertNameList(queries);
+  size_t nbest_num = 10;
+  dict = namelti.ConvertNameList(queries, nbest_num);
   nlohmann::json response_json(nlohmann::json::value_t::object);
   if(!dict.empty()){
     for (auto dit = dict.begin(); dit != dict.end(); ++dit) {
@@ -110,7 +111,8 @@ void RESTServer::convertNameHandler(const Pistache::Rest::Request& request, Pist
   nlohmann::json request_json = json.parse(json_str);
   std::string query = request_json["query"];
   std::cout << query << std::endl;
-  std::vector<std::pair<std::string, float>> results = namelti.ConvertName(query);
+  size_t nbest_num = 10;
+  std::vector<std::pair<std::string, float>> results = namelti.ConvertName(query, nbest_num);
 
   nlohmann::json response_json(nlohmann::json::value_t::array);
   for (std::pair<std::string, float>& result: results) {
