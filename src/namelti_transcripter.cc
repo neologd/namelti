@@ -48,9 +48,8 @@ bool has_key_using_find(std::map<std::string, std::vector<std::pair<std::string,
   }
 }
 
-std::map<std::string, std::vector<std::pair<std::string, float> > > NameltiTranscripter::GetTranscript(std::vector<std::string> &queries) {
+std::map<std::string, std::vector<std::pair<std::string, float> > > NameltiTranscripter::GetTranscript(std::vector<std::string> &queries, size_t nbest_num = 5) {
   std::map<std::string, std::vector<std::pair<std::string, float> > > transcripter_result;
-  size_t nbest_num = 5;
   try {
     for (std::string& query : queries) {
 

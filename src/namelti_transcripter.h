@@ -34,12 +34,13 @@ public:
   };
 
   Tagger* GetTagger();
-  std::map<std::string, std::vector<std::pair<std::string, float>>> GetTranscript(std::vector<std::string>&);
+  std::map<std::string, std::vector<std::pair<std::string, float>>> GetTranscript(std::vector<std::string>&, size_t);
 
 private:
   NameltiTranscripter::Tagger *tagger;
 
 };
+
 
 
 } // namespace namelti
