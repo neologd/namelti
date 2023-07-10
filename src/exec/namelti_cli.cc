@@ -33,7 +33,8 @@ int main(int argc, char* argv[]) {
             else if(query.empty()){
                 continue;
             }
-            std::vector<std::pair<std::string, float>> results = namelti.ConvertName(query);
+            size_t maxResults = 10;
+            std::vector<std::pair<std::string, float>> results = namelti.ConvertName(query, maxResults);
             if(!results.empty()){
               //std::cout << it->first << " => " << "\n";
               for (std::pair<std::string, float>& result : results) {
